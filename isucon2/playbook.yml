@@ -49,33 +49,6 @@
     - sudo_user: isucon
       git: repo=https://github.com/tagomoris/xbuild.git dest=/home/isucon/.xbuild
 
-    # nodejs
-    - sudo_user: isucon
-      shell: .xbuild/node-install v0.8.28 /home/isucon/local/node-v0.8
-      args:
-        creates: /home/isucon/local/node-v0.8/bin/node
-    - sudo_user: isucon
-      shell: |
-        set -e
-        source ./env.sh
-        cd webapp/nodejs/
-        npm install
-      args:
-        creates: /home/isucon/webapp/nodejs/node_modules
-
-    # perl
-    - sudo_user: isucon
-      shell: .xbuild/perl-install 5.16.1 /home/isucon/local/perl-5.16
-      args:
-        creates: /home/isucon/local/perl-5.16/bin/perl
-    - sudo_user: isucon
-      shell: |
-        set -e
-        source ./env.sh
-        cd webapp/perl/
-        curl -L https://cpanmin.us | perl - Carton
-        carton install
-
     # ruby
     - yum: name=openssl-devel
     - yum: name=readline-devel
@@ -94,37 +67,6 @@
         gem install bundler
         bundle install --no-deployment --without development
         bundle install --deployment --without development
-
-    # python
-    - yum: name=patch
-    - sudo_user: isucon
-      shell: .xbuild/python-install 2.7.3 /home/isucon/local/python-2.7
-      args:
-        creates: /home/isucon/local/python-2.7/bin/python
-    - sudo_user: isucon
-      shell: |
-        set -e
-        source ./env.sh
-        cd webapp/python/
-        easy_install flask MySQL-python gunicorn
-
-    ## java
-    #- yum: name=java-1.6.0-openjdk
-    #- yum: name=tomcat6
-    #- get_url: url=http://archive.apache.org/dist/maven/binaries/apache-maven-2.2.1-bin.tar.gz dest=/tmp/
-    #- file: path=/home/isucon/local/java-6 state=directory
-    #- sudo_user: isucon
-    #  shell: |
-    #    tar xf /tmp/apache-maven-2.2.1-bin.tar.bz2 -C /tmp
-    #    rsync -a /tmp/apache-maven-2.2.1/ /home/isucon/local/java-6/
-    #  args:
-    #    creates: /home/isucon/local/java-6/bin/mvn
-    #- sudo_user: isucon
-    #  shell: |
-    #    set -e
-    #    source ./env.sh
-    #    cd webapp/java/
-    #    mvn package -P release
 
     # bench
     - sudo_user: isucon
