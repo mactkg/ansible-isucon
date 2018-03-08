@@ -5,7 +5,7 @@
   sudo_user: isucon
   tasks:
     - git:
-        repo=https://github.com/isucon/isucon5-qualify.git
+        repo=https://github.com/mactkg/isucon5-qualify.git
         dest=/tmp/isucon5-qualify
     - command: rsync -avz --delete /tmp/isucon5-qualify/webapp /home/isucon/
     # /home/isucon/webapp/{etc,go,java,nodejs,perl,php,python,ruby,scala,sql,static}
