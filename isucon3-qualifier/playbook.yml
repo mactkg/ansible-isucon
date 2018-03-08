@@ -71,9 +71,9 @@
     - yum: name=zlib-devel
     - sudo_user: isucon
       #shell: .xbuild/ruby-install 2.0.0-p247 /home/isucon/local/ruby-2.0
-      shell: .xbuild/ruby-install 2.0.0-p645 /home/isucon/local/ruby-2.0
+      shell: .xbuild/ruby-install 2.5.0 /home/isucon/local/ruby-2.5
       args:
-        creates: /home/isucon/local/ruby-2.0/bin/ruby
+        creates: /home/isucon/local/ruby-2.5/bin/ruby
     - sudo_user: isucon
       shell: |
         set -e
